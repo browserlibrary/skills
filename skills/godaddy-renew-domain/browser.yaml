@@ -1,0 +1,33 @@
+spec: browserlibrary/v0.1
+name: godaddy-renew-domain        # must match SKILL.md
+version: 0.1.0                    # semantic version; bump on any change
+maker: github:example-maker       # verified maker account
+license: Apache-2.0
+summary: Renew a GoDaddy domain for one year and confirm the new expiry.
+collections: [domains-and-websites]
+inputs:
+  - name: domain
+    type: string
+    example: harborandpine.example
+sites:                             # every site the skill may open; nothing else is allowed
+  - dcc.godaddy.com
+  - www.godaddy.com
+  - sso.godaddy.com
+sign_in:
+  - site: godaddy.com
+    method: vault                  # vault only; skills never hold credentials
+actions:                           # what the skill may do; anything unlisted is blocked
+  read: true
+  fill_forms: true
+  download_files: false
+  upload_files: false
+  send_messages: false
+  pay: ask                         # ask = only after the owner approves the exact amount
+  delete: false
+  change_settings: false
+limits:
+  max_steps: 40
+  max_minutes: 10
+data:
+  personal_data: none              # none | reads | writes; reads/writes need a stated reason
+  training_use: allowed            # allowed | never (private or sensitive skills set never)
